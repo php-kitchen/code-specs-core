@@ -156,7 +156,7 @@ trait TestGuyMethods {
      * @return \PHPKitchen\CodeSpecsCore\Expectation\Matcher\ValueMatcher
      */
     public function see($variable): ValueMatcher {
-        return $this->dispatch($variable)->isValueOf();
+        return $this->dispatch($variable)->isMixed();
     }
 
     /**

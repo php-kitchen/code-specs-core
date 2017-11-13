@@ -52,83 +52,38 @@ class Dispatcher {
     protected function init(): void {
     }
 
-    /**
-     * @param string $variableNameOrVariable variable to be tested or it's name
-     * @param mixed $variable variable to be tested (optional)
-     * @return \PHPKitchen\CodeSpecsCore\Expectation\Matcher\ValueMatcher
-     */
-    public function isValueOf(): ValueMatcher {
+    public function isMixed(): ValueMatcher {
         return $this->createMatcher(ValueMatcher::class, 'value');
     }
 
-    /**
-     * @param string $variableNameOrVariable variable to be tested or it's name
-     * @param string $variable variable to be tested (optional)
-     * @return \PHPKitchen\CodeSpecsCore\Expectation\Matcher\StringMatcher
-     */
     public function isString(): StringMatcher {
         return $this->createMatcher(StringMatcher::class, 'boolean');
     }
 
-    /**
-     * @param string $variableNameOrVariable variable to be tested or it's name
-     * @param array|\ArrayAccess $variable variable to be tested (optional)
-     * @return \PHPKitchen\CodeSpecsCore\Expectation\Matcher\ArrayMatcher
-     */
     public function isArray(): ArrayMatcher {
         return $this->createMatcher(ArrayMatcher::class, 'array');
     }
 
-    /**
-     * @param string $variableNameOrVariable variable to be tested or it's name
-     * @param boolean $variable variable to be tested (optional)
-     * @return \PHPKitchen\CodeSpecsCore\Expectation\Matcher\BooleanMatcher
-     */
     public function isBoolean(): BooleanMatcher {
         return $this->createMatcher(BooleanMatcher::class, 'boolean');
     }
 
-    /**
-     * @param string $variableNameOrVariable variable to be tested or it's name
-     * @param int|float $variable variable to be tested (optional)
-     * @return \PHPKitchen\CodeSpecsCore\Expectation\Matcher\NumberMatcher
-     */
     public function isNumber(): NumberMatcher {
         return $this->createMatcher(NumberMatcher::class, 'number');
     }
 
-    /**
-     * @param string $variableNameOrVariable variable to be tested or it's name
-     * @param object $variable variable to be tested (optional)
-     * @return \PHPKitchen\CodeSpecsCore\Expectation\Matcher\ObjectMatcher
-     */
     public function isObject(): ObjectMatcher {
         return $this->createMatcher(ObjectMatcher::class, 'object');
     }
 
-    /**
-     * @param string $variableNameOrVariable variable to be tested or it's name
-     * @param string $variable variable to be tested (optional)
-     * @return \PHPKitchen\CodeSpecsCore\Expectation\Matcher\ClassMatcher
-     */
     public function isClass(): ClassMatcher {
         return $this->createMatcher(ClassMatcher::class, 'class');
     }
 
-    /**
-     * @param string $variableNameOrVariable variable to be tested or it's name
-     * @param string $variable variable to be tested (optional)
-     * @return \PHPKitchen\CodeSpecsCore\Expectation\Matcher\FileMatcher
-     */
     public function isFile(): FileMatcher {
         return $this->createMatcher(FileMatcher::class, 'file');
     }
 
-    /**
-     * @param string $variableNameOrVariable variable to be tested or it's name
-     * @param string $variable variable to be tested (optional)
-     * @return \PHPKitchen\CodeSpecsCore\Expectation\Matcher\DirectoryMatcher
-     */
     public function isDirectory(): DirectoryMatcher {
         return $this->createMatcher(DirectoryMatcher::class, 'directory');
     }

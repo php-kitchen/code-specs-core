@@ -10,7 +10,7 @@ use Tests\Base\BaseMatcherTest;
  *
  * @method ArrayMatcher createMatcherWithActualValue($actualValue)
  *
- * @coversDefaultClass \PHPKitchen\CodeSpecsCore\Expectation\ArrayMatcher
+ * @coversDefaultClass \PHPKitchen\CodeSpecsCore\Expectation\Matcher\ArrayMatcher
  *
  * @package Tests\Expectation
  * @author Dmitry Kolodko <prowwid@gmail.com>

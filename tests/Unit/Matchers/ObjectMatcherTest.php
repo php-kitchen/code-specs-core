@@ -11,7 +11,7 @@ use Tests\Base\BaseMatcherTest;
  *
  * @method ObjectMatcher createMatcherWithActualValue($actualValue)
  *
- * @coversDefaultClass \PHPKitchen\CodeSpecsCore\Expectation\ObjectMatcher
+ * @coversDefaultClass \PHPKitchen\CodeSpecsCore\Expectation\Matcher\ObjectMatcher
  *
  * @package Tests\Expectation
  * @author Dmitry Kolodko <prowwid@gmail.com>
@@ -111,8 +111,8 @@ XML;
 
     /**
      * @covers ::throwsException
-     * @covers  \PHPKitchen\CodeSpecsCore\Matchers\Internal\ObjectExceptionMatcher::withMessage
-     * @covers  \PHPKitchen\CodeSpecsCore\Matchers\Internal\ObjectExceptionMatcher::whenInvokedMethod
+     * @covers  \PHPKitchen\CodeSpecsCore\Expectation\Internal\ObjectExceptionMatcher::withMessage
+     * @covers  \PHPKitchen\CodeSpecsCore\Expectation\Internal\ObjectExceptionMatcher::when
      */
     public function testThrowsException() {
         $object = $this->createMatcherWithActualValue(new TestDataClass());
