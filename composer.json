@@ -1,6 +1,6 @@
 {
-    "name": "dekeysoft/code-specs",
-    "description": "Codeception module designed to write Unit tests in BDD-style. Allows to express what test intended to check in human-readable format.",
+    "name": "php-kitchen/code-specs-core",
+    "description": "Core module of CodeSpecs - BDD extension for PHPUnit and Codeception that allows to write tests as a specifications in a human-readable format.",
     "type": "library",
     "license": "MIT",
     "keywords": [
@@ -23,11 +23,12 @@
         "php": "^7.1"
     },
     "require-dev": {
-        "codeception/codeception": "^2.3"
+        "phpunit/phpunit": "^6.2",
+        "satooshi/php-coveralls": "^1.0"
     },
     "autoload": {
         "psr-4": {
-            "PHPKitchen\\CodeSpecsModule\\": "src",
+            "PHPKitchen\\CodeSpecsCore\\": "src",
             "Tests\\": "tests"
         }
     }

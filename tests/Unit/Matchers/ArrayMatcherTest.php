@@ -3,7 +3,6 @@
 namespace Tests\Unit\Matchers;
 
 use PHPKitchen\CodeSpecsCore\Expectation\Matcher\ArrayMatcher;
-use PHPKitchen\CodeSpecsCore\Expectation\Matcher\Internal\Assert;
 use Tests\Base\BaseMatcherTest;
 
 /**
@@ -14,7 +13,7 @@ use Tests\Base\BaseMatcherTest;
  * @coversDefaultClass \PHPKitchen\CodeSpecsCore\Expectation\ArrayMatcher
  *
  * @package Tests\Expectation
- * @author Dmitry Kolodko <dangel.dekey@gmail.com>
+ * @author Dmitry Kolodko <prowwid@gmail.com>
  */
 class ArrayMatcherTest extends BaseMatcherTest {
     protected function initMatcherClass() {

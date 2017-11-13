@@ -2,8 +2,6 @@
 
 namespace Tests\Base;
 
-use PHPKitchen\CodeSpecsCore\Base\BehaviorSpecification;
-
 /**
  * Represents base class for all of the test cases.
  *
@@ -11,6 +9,6 @@ use PHPKitchen\CodeSpecsCore\Base\BehaviorSpecification;
  *
  * @author Dmitry Kolodko <prowwid@gmail.com>
  */
-class TestCase extends BehaviorSpecification {
+class TestCase extends \PHPUnit\Framework\TestCase {
     const FIXTURES_DIR = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'Fixtures' . DIRECTORY_SEPARATOR;
 }

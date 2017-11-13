@@ -10,7 +10,7 @@ namespace PHPKitchen\CodeSpecsCore\Expectation\Internal;
  */
 class StepsList {
     /**
-     * @var Step[]
+     * @var Step[] steps storage.
      */
     private $steps = [];
     private static $instance;

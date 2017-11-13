@@ -17,7 +17,9 @@ use PHPKitchen\CodeSpecsCore\Expectation\Matcher\ValueMatcher;
 use PHPUnit\Framework\Test;
 
 /**
- * Represents
+ * Represents matchers dispatcher.
+ *
+ * Required to dispatch asserts to specific matchers.
  *
  * @package PHPKitchen\CodeSpecsCore\Expectation
  * @author Dmitry Kolodko <prowwid@gmail.com>
@@ -47,7 +49,7 @@ class Dispatcher {
     /**
      * Override this method if you want to initialize anything after constructor.
      */
-    protected function init():void {
+    protected function init(): void {
     }
 
     /**

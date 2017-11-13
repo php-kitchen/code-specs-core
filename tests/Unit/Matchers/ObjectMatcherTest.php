@@ -14,7 +14,7 @@ use Tests\Base\BaseMatcherTest;
  * @coversDefaultClass \PHPKitchen\CodeSpecsCore\Expectation\ObjectMatcher
  *
  * @package Tests\Expectation
- * @author Dmitry Kolodko <dangel.dekey@gmail.com>
+ * @author Dmitry Kolodko <prowwid@gmail.com>
  */
 class ObjectMatcherTest extends BaseMatcherTest {
     protected function initMatcherClass() {

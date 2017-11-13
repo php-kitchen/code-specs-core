@@ -1,86 +1,35 @@
-# CodeSpecs
+# CodeSpecsCore
 
-Codeception module for BDD style Unit tests that allows to writes test in a specification way using human-readable format. 
-Goal of this module is to add a bunch of cool methods to "Actor" for unit testing and show a way of representing unit tests as a behavior specifications of a specific class and a test of specific method as a specification of the method.
-See by yourself:
-```php
-use DeKey\CodeSpecs\Base\BehaviorSpecification;
+It is a core package for [CodeSpecs](https://github.com/php-kitchen/code-specs) and it's mirror for Codeception [CodeSpecsModule](https://github.com/php-kitchen/code-specs-module).
+It's an internal package that gather common code between [CodeSpecs](https://github.com/php-kitchen/code-specs) and [CodeSpecsModule](https://github.com/php-kitchen/code-specs-module). Do not use this package directly at it supposed to be used only in aforementioned packages.
 
-class IncomeCalculatorTest extends BehaviorSpecification {
-    private const EXPECTED_INCOME = 478;
-
-    /**
-     * @test
-     */
-    public function calculateIncomeSpec() {
-        $service = new IncomeService();
-        $I = $this->tester;
-        $I->describe('process of income calculations.');
-        $I->verifyThat('calculated income matches expected income.');
-        $I->seeThatValueOf('calculated income', $service->calculateIncome())->isEqualTo(self::EXPECTED_INCOME);
-    }
-}
-```
-
-CodeSpecs also decorates errors output so, for example, if "IncomeService" service from example above will incorrectly calculate income the error output will include following message(example of output in PHPStorm):
-
-![picture alt](docs/failed-test-output.png "Error output")
-
-## Package information
-
-Latest Stable Version |  Latest Unstable Version | Total Downloads | Monthly Downloads | Licensing 
---------------------- |  ----------------------- |  -------------- | ----------------  |--------- 
-[![Latest Stable Version](https://poser.pugx.org/dekeysoft/code-specs/v/stable)](https://packagist.org/packages/dekeysoft/code-specs) | [![Latest Unstable Version](https://poser.pugx.org/dekeysoft/code-specs/v/unstable)](https://packagist.org/packages/dekeysoft/code-specs) | [![Total Downloads](https://poser.pugx.org/dekeysoft/code-specs/downloads)](https://packagist.org/packages/dekeysoft/code-specs) | [![Monthly Downloads](https://poser.pugx.org/dekeysoft/code-specs/d/monthly)](https://packagist.org/packages/dekeysoft/code-specs) | [![License](https://poser.pugx.org/dekeysoft/code-specs/license)](https://github.com/dekeysoft/code-specs/blob/master/LICENSE)
-
-## Requirements
-
-**`PHP >= 7.1` is required.**
-
-**`Codeception >= 2.3` is required.**
-
-## Getting Started
-
-Run the following command to add CodeSpecs to your project's `composer.json`. See [Packagist](https://packagist.org/packages/dekeysoft/code-specs) for specific versions.
-
-```bash
-codeception require dekeysoft/code-specs
-```
-
-Or you can copy this library from:
-- [Packagist](https://packagist.org/packages/dekeysoft/code-specs)
-- [Github](https://github.com/dekeysoft/code-specs)
-
-
-Update your suite configuration to enable CodeSpecs module
-```yaml
-modules:
-    enabled:
-        - \DeKey\CodeSpecs\Module\CodeSpecs
-```
-
-Re-build your suite to get all of the CodeSpecs methods to your actor class(es).
-```bash
-cocecept build
-```
-
-Then you can use CodeSpecs simply by extending your test case from "DeKey\CodeSpecs\Base\BehaviorSpecification". Example:
-```php
-use DeKey\CodeSpecs\Base\BehaviorSpecification;
-
-class YourTestCase extends BehaviorSpecification {
-
-    public function testSomeMethod() {
-        $I = $this->tester;
-        ......
-        $I->seeThatBoolean('my dummy variable', true)->isFalse();
-    }
-}
-```
-
-See more guides in the [project documentation](docs/README.md)
+For docs and guides go to the [CodeSpecs project documentation](https://github.com/php-kitchen/code-specs/tree/master/docs)
 
 ## Build status
 
 CI status    | Code quality
 ------------ | ------------
-[![Build Status](https://travis-ci.org/dekeysoft/code-specs.svg?branch=master)](https://travis-ci.org/dekeysoft/code-specs) | [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/dekeysoft/code-specs/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/dekeysoft/code-specs/?branch=master)
+[![Build Status](https://travis-ci.org/php-kitchen/code-specs-core.svg?branch=master)](https://travis-ci.org/php-kitchen/code-specs-core) | [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/php-kitchen/code-specs-core/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/php-kitchen/code-specs-core/?branch=master)
+
+
+## Package information
+
+Latest Stable Version |  Latest Unstable Version | Total Downloads | Monthly Downloads | Licensing 
+--------------------- |  ----------------------- |  -------------- | ----------------  |--------- 
+[![Latest Stable Version](https://poser.pugx.org/php-kitchen/code-specs-core/v/stable)](https://packagist.org/packages/php-kitchen/code-specs-core) | [![Latest Unstable Version](https://poser.pugx.org/php-kitchen/code-specs-core/v/unstable)](https://packagist.org/packages/php-kitchen/code-specs-core) | [![Total Downloads](https://poser.pugx.org/php-kitchen/code-specs-core/downloads)](https://packagist.org/packages/php-kitchen/code-specs-core) | [![Monthly Downloads](https://poser.pugx.org/php-kitchen/code-specs-core/d/monthly)](https://packagist.org/packages/php-kitchen/code-specs-core) | [![License](https://poser.pugx.org/php-kitchen/code-specs-core/license)](https://github.com/php-kitchen/code-specs-core/blob/master/LICENSE)
+
+## Requirements
+
+**`PHP >= 7.1` is required.**
+
+**`PHPUnit >= 6.2` is required.**
+
+## Contributing
+
+Want to help? 
+First read [contributing rules](https://github.com/php-kitchen/code-specs/blob/master/docs/CONTRIBUTING.md)
+
+Then open issue and we would discuss all of the questions about bugfix, feature or request.
+
+Or [join our server at Discord](https://discord.gg/Ez5VZhC) if you want to ask any questions, suggest improvements or just to talk with community and developers. 
+

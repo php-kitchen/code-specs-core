@@ -18,7 +18,7 @@ use PHPKitchen\CodeSpecsCore\Expectation\Matcher\StringMatcher;
 use PHPKitchen\CodeSpecsCore\Expectation\Matcher\ValueMatcher;
 
 /**
- * Represents
+ * Represents common expectation methods that can be used in test guy implementation.
  *
  * @package PHPKitchen\CodeSpecsCore\Mixins
  * @author Dmitry Kolodko <prowwid@gmail.com>
@@ -33,6 +33,7 @@ trait TestGuyMethods {
      */
     private $context;
     protected $variableName = '';
+
     //region ----------------------- SPECIFICATION METHODS -----------------------
 
     public function init() {
@@ -40,8 +41,12 @@ trait TestGuyMethods {
     }
 
     /**
-     * @param $scenario
-     * @return \PHPKitchen\CodeSpecsCore\Module\CodeSpecs
+     * Specifies scenario test guy is working on.
+     *
+     * @param string $scenario scenario name.
+     * Scenario should be a logical ending of "I describe ". For example: "process of user registration".
+     * Such scenario would result in "I describe process of user registration" output in console.
+     * @return $this
      */
     public function describe(string $scenario): TestGuy {
         $this->steps->add('I describe ' . $scenario);
@@ -49,8 +54,13 @@ trait TestGuyMethods {
     }
 
     /**
-     * @param $expectation
-     * @return \PHPKitchen\CodeSpecsCore\Module\CodeSpecs
+     * Specifies what test guy expects from a set of matchers that would be defined next in the
+     * specification.
+     *
+     * @param string $expectation expectation text.
+     * Expectation should be a logical ending of "I expect that ". For example: "user is added to the DB".
+     * Such scenario would result in "I expect that user is added to the DB" output in console.
+     * @return $this
      */
     public function expectThat(string $expectation): TestGuy {
         $this->steps->add('I expect that ' . $expectation);
@@ -59,8 +69,13 @@ trait TestGuyMethods {
     }
 
     /**
-     * @param $expectation
-     * @return \PHPKitchen\CodeSpecsCore\Module\CodeSpecs
+     * Specifies what test guy expects from a set of matchers that would be defined next in the
+     * specification.
+     *
+     * @param string $expectation expectation text.
+     * Expectation should be a logical ending of "I expect to ". For example: "see user in the DB".
+     * Such scenario would result in "I expect to see user in the DB" output in console.
+     * @return $this
      */
     public function expectTo(string $expectation): TestGuy {
         $this->steps->add('I expect to ' . $expectation);
@@ -68,8 +83,16 @@ trait TestGuyMethods {
     }
 
     /**
-     * @param $expectation
-     * @return \PHPKitchen\CodeSpecsCore\Module\CodeSpecs
+     * Specifies what test guy expects from a set of matchers that would be defined next in the
+     * specification.
+     *
+     * @param string $expectation expectation text.
+     * Expectation should be a logical ending of "I expect to ". For example: "see user in the DB".
+     * Such scenario would result in "I expect to see user in the DB" output in console.
+     * @param callable $verificationSteps callable function with following definition "function (TestGuy $I) { ..." that contains a group of
+     * expectations united by one verification topic. All of the expectations would be executed once they
+     * are defined.
+     * @return $this
      */
     public function verifyThat(string $expectation, callable $verificationSteps = null): TestGuy {
         $this->steps->add('I verify that ' . $expectation);
@@ -81,7 +104,31 @@ trait TestGuyMethods {
     }
 
     /**
-     * @param $variableName
+     * Specifies name of a variable test guy would check.
+     *
+     * @param string $variableName name of a variable to look at.
+     * @return TestGuy
+     */
+    public function lookAt(string $variableName): TestGuy {
+        $this->variableName = $variableName;
+        return $this;
+    }
+
+
+    /**
+     * Creates runtime matcher that you can use to perform typical asserts.
+     * Runtime matcher is an object that represents a set of asserts from a typical matcher that
+     * aren't executed at a time they were defined but would be executed every time runtime matcher object
+     * would be called as a function with one argument - value to assert.
+     *
+     * For example:
+     * <code>
+     *  $userHasName = $I->match('user')->isArray()->isNotEmpty()->hasKey('name');
+     *  $userHasName($admin);
+     *  $userHasName($member);
+     * </code>
+     *
+     * @param string $variableName name of a variable to look at.
      * @return \PHPKitchen\CodeSpecsCore\Expectation\Dispatcher\DelayedDispatcher
      */
     public function match(string $variableName): DelayedDispatcher {
@@ -89,33 +136,33 @@ trait TestGuyMethods {
         return $this->createDispatcher(DelayedDispatcher::class, null);
     }
 
-    /**
-     * @param $variableName
-     * @return \PHPKitchen\CodeSpecsCore\Expectation\Dispatcher\DelayedDispatcher
-     */
-    public function lookAt(string $variableName): TestGuy {
-        $this->variableName = $variableName;
-        return $this;
-    }
 
     /**
-     * @param $numberOfTimeUnits
-     * @return \PHPKitchen\CodeSpecsCore\Module\CodeSpecs
+     * Stops execution for specified number of units of time.
+     *
+     * @param int $numberOfTimeUnits number of units of time.
+     * {@link Wait} specifies what unit should be used.
+     *
+     * @return Wait
      */
     public function wait($numberOfTimeUnits): Wait {
         return new Wait($numberOfTimeUnits, $this->steps);
     }
 
     /**
-     * @param $variable
-     * @return \PHPKitchen\CodeSpecsCore\Expectation\Dispatcher\Dispatcher
+     * Starts a chain of asserts from {@link ValueMatcher}.
+     *
+     * @param mixed $variable variable to be tested
+     * @return \PHPKitchen\CodeSpecsCore\Expectation\Matcher\ValueMatcher
      */
     public function see($variable): ValueMatcher {
         return $this->dispatch($variable)->isValueOf();
     }
 
     /**
-     * @param string $string variable to be tested (optional)
+     * Starts a chain of asserts from {@link StringMatcher}.
+     *
+     * @param string $variable variable to be tested
      * @return \PHPKitchen\CodeSpecsCore\Expectation\Matcher\StringMatcher
      */
     public function seeString($string): StringMatcher {
@@ -123,8 +170,9 @@ trait TestGuyMethods {
     }
 
     /**
-     * @param string $variableNameOrVariable variable to be tested or it's name
-     * @param array|\ArrayAccess $variable variable to be tested (optional)
+     * Starts a chain of asserts from {@link ArrayMatcher}.
+     *
+     * @param array|\ArrayAccess $variable variable to be tested
      * @return \PHPKitchen\CodeSpecsCore\Expectation\Matcher\ArrayMatcher
      */
     public function seeArray($variable): ArrayMatcher {
@@ -132,8 +180,9 @@ trait TestGuyMethods {
     }
 
     /**
-     * @param string $variableNameOrVariable variable to be tested or it's name
-     * @param boolean $variable variable to be tested (optional)
+     * Starts a chain of asserts from {@link BooleanMatcher}.
+     *
+     * @param boolean $variable variable to be tested
      * @return \PHPKitchen\CodeSpecsCore\Expectation\Matcher\BooleanMatcher
      */
     public function seeBool($variable): BooleanMatcher {
@@ -141,8 +190,9 @@ trait TestGuyMethods {
     }
 
     /**
-     * @param string $variableNameOrVariable variable to be tested or it's name
-     * @param int|float $variable variable to be tested (optional)
+     * Starts a chain of asserts from {@link NumberMatcher}.
+     *
+     * @param int|float $variable variable to be tested
      * @return \PHPKitchen\CodeSpecsCore\Expectation\Matcher\NumberMatcher
      */
     public function seeNumber($variable): NumberMatcher {
@@ -150,8 +200,9 @@ trait TestGuyMethods {
     }
 
     /**
-     * @param string $variableNameOrVariable variable to be tested or it's name
-     * @param object $variable variable to be tested (optional)
+     * Starts a chain of asserts from {@link ObjectMatcher}.
+     *
+     * @param object $variable variable to be tested
      * @return \PHPKitchen\CodeSpecsCore\Expectation\Matcher\ObjectMatcher
      */
     public function seeObject($variable): ObjectMatcher {
@@ -159,8 +210,9 @@ trait TestGuyMethods {
     }
 
     /**
-     * @param string $variableNameOrVariable variable to be tested or it's name
-     * @param string $variable variable to be tested (optional)
+     * Starts a chain of asserts from {@link ClassMatcher}.
+     *
+     * @param string $variable variable to be tested
      * @return \PHPKitchen\CodeSpecsCore\Expectation\Matcher\ClassMatcher
      */
     public function seeClass($variable): ClassMatcher {
@@ -168,8 +220,9 @@ trait TestGuyMethods {
     }
 
     /**
-     * @param string $variableNameOrVariable variable to be tested or it's name
-     * @param string $variable variable to be tested (optional)
+     * Starts a chain of asserts from {@link FileMatcher}.
+     *
+     * @param string $variable variable to be tested
      * @return \PHPKitchen\CodeSpecsCore\Expectation\Matcher\FileMatcher
      */
     public function seeFile($variable): FileMatcher {
@@ -177,16 +230,14 @@ trait TestGuyMethods {
     }
 
     /**
-     * @param string $variableNameOrVariable variable to be tested or it's name
-     * @param string $variable variable to be tested (optional)
+     * Starts a chain of asserts from {@link DirectoryMatcher}.
+     *
+     * @param string $variable variable to be tested
      * @return \PHPKitchen\CodeSpecsCore\Expectation\Matcher\DirectoryMatcher
      */
     public function seeDirectory($variable): DirectoryMatcher {
         return $this->dispatch($variable)->isDirectory();
     }
-
-
-
     //endregion
 
     //region ----------------------- UTIL METHODS -----------------------

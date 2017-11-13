@@ -8,7 +8,9 @@ use PHPKitchen\CodeSpecsCore\Module\CodeSpecs;
 use PHPUnit\Framework\Test;
 
 /**
- * Represents
+ * Represents PHPUnit Assert facade.
+ *
+ * Goal of this class is prepare assert messages according
  *
  * @package PHPKitchen\CodeSpecsCore\Expectation\Internal
  * @author Dmitry Kolodko <prowwid@gmail.com>
@@ -21,32 +23,42 @@ class Assert {
      */
     protected $actual;
     /**
-     * @var mixed actual value or variable that will be matched to expectations.
+     * @var StepsList list of steps that was made prior current assert.
      */
     protected $stepsList;
     /**
-     * @var \Codeception\Test\Unit
+     * @var Test the test object.
      */
     protected $test;
     /**
      * @var string description of expectation. If expectation fails this description will be displayed in console.
      */
     protected $description;
-    protected $assertSteps;
+    /**
+     * @var \SplQueue list of steps that was delayed to be executed after definition.
+     */
+    protected $delayedAssertSteps;
+    /**
+     * @var int execution strategy. Either {@link DELAYED_EXECUTION_STRATEGY} or {@link IN_TIME_EXECUTION_STRATEGY}.
+     * Identifies whether to run assert methods when they called or later(runtime matchers functionality)
+     */
     protected $strategy;
-    protected $currentStepName = '';
+    /**
+     * @var string internal value that identifies current step name that would be added to {@link stepsList}
+     */
+    private $currentStepName = '';
 
     public function __construct(StepsList $stepsList, Test $test, $actual, $description = '', $strategy = self::IN_TIME_EXECUTION_STRATEGY) {
         $this->stepsList = $stepsList;
         $this->test = $test;
         $this->actual = $actual;
         $this->description = $description;
-        $this->assertSteps = new \SplQueue();
+        $this->delayedAssertSteps = new \SplQueue();
         $this->strategy = $strategy;
     }
 
     public function __clone() {
-        $this->assertSteps = clone $this->assertSteps;
+        $this->delayedAssertSteps = clone $this->delayedAssertSteps;
     }
 
     //region --------------------------- OWN METHODS ----------------------------//
@@ -76,8 +88,8 @@ class Assert {
             return;
         }
         $this->actual = $actualValue;
-        while (!$this->assertSteps->isEmpty()) {
-            $step = $this->assertSteps->dequeue();
+        while (!$this->delayedAssertSteps->isEmpty()) {
+            $step = $this->delayedAssertSteps->dequeue();
             array_push($step[1], $this->getMessageForAssert());
             array_unshift($step[1], $this->actual);
             $this->executeAssertMethod($step[0], $step[1], $step[2]);
@@ -89,7 +101,7 @@ class Assert {
         if ($this->strategy === self::IN_TIME_EXECUTION_STRATEGY) {
             $this->executeAssertMethod($method, $config, $stepName);
         } else {
-            $this->assertSteps->enqueue([$method, $config, $stepName]);
+            $this->delayedAssertSteps->enqueue([$method, $config, $stepName]);
         }
     }
 

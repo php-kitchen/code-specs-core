@@ -40,7 +40,7 @@ class Wait {
     }
 
     protected function wait($unitOfTime, $multiplier) {
-       $this->steps->add("I wait {$this->timeToWait} {$unitOfTime}");
+        $this->steps->add("I wait {$this->timeToWait} {$unitOfTime}");
 
         usleep($this->timeToWait * $multiplier);
     }

@@ -3,13 +3,21 @@
 namespace PHPKitchen\CodeSpecsCore\Expectation\Internal;
 
 /**
- * Represents
+ * Represents assert step of each expectaion.
+ * Calling any if matcher assert methods produce new instance of this class.
  *
  * @package PHPKitchen\CodeSpecsCore\Module
  * @author Dmitry Kolodko <prowwid@gmail.com>
  */
 class Step {
+    /**
+     * @var string name of the step that would be used in error output.
+     */
     private $name;
+    /**
+     * @var bool identifies whether step successfully passed or not.
+     * Based on this value output of the step  would contain checked or not checked sigh.
+     */
     private $checked = false;
 
     public function __construct($name) {

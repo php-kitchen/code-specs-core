@@ -13,7 +13,7 @@ use Tests\Base\BaseMatcherTest;
  * @coversDefaultClass \PHPKitchen\CodeSpecsCore\Expectation\FileMatcher
  *
  * @package Tests\Expectation
- * @author Dmitry Kolodko <dangel.dekey@gmail.com>
+ * @author Dmitry Kolodko <prowwid@gmail.com>
  */
 class FileMatcherTest extends BaseMatcherTest {
     protected function initMatcherClass() {
