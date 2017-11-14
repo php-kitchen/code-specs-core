@@ -20,6 +20,8 @@ use PHPKitchen\CodeSpecsCore\Expectation\Matcher\ValueMatcher;
 /**
  * Represents common expectation methods that can be used in test guy implementation.
  *
+ * @codeCoverageIgnore
+ *
  * @package PHPKitchen\CodeSpecsCore\Mixins
  * @author Dmitry Kolodko <prowwid@gmail.com>
  */

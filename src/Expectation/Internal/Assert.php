@@ -12,6 +12,8 @@ use PHPUnit\Framework\Test;
  *
  * Goal of this class is prepare assert messages according
  *
+ * @codeCoverageIgnore
+ *
  * @package PHPKitchen\CodeSpecsCore\Expectation\Internal
  * @author Dmitry Kolodko <prowwid@gmail.com>
  */
