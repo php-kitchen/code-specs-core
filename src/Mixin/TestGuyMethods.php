@@ -31,7 +31,7 @@ trait TestGuyMethods {
     /**
      * @var \PHPUnit\Framework\Test
      */
-    private $context;
+    protected $context;
     protected $variableName = '';
 
     //region ----------------------- SPECIFICATION METHODS -----------------------
@@ -251,7 +251,7 @@ trait TestGuyMethods {
     }
 
     private function createDispatcher($class, $actualValue): Dispatcher {
-        $dispatcher = new $class($this, $this->context, $actualValue, $this->variableName);
+        $dispatcher = new $class($this->context, $actualValue, $this->variableName);
         $this->variableName = '';
         return $dispatcher;
     }
