@@ -35,9 +35,9 @@ class ObjectExceptionMatcher extends Matcher {
      * Supposed to executes method of the object.
      * This methods should to be used after {@link throwsException} and "with*" methods to gain expression like:
      * <pre>
-     * $I->seeThatObject($a)->throwsException(Exception::class)->when(function($object) {$object->doParty();});
+     * $I->seeObject($a)->throwsException(Exception::class)->when(function($object) {$object->doParty();});
      * // or
-     * $I->seeThatObject($a)->throwsException(IronyException::class)->withCode(500)->when(function($object) {$object->doParty();});
+     * $I->seeObject($a)->throwsException(IronyException::class)->withCode(500)->when(function($object) {$object->doParty();});
      * <pre/>
      * and finish scenario.
      */

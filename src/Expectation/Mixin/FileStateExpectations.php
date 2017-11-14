@@ -3,7 +3,7 @@
 namespace PHPKitchen\CodeSpecsCore\Expectation\Mixin;
 
 /**
- * Represents
+ * Represents a common file expectations that being used in both file and directory matchers.
  *
  * @method \PHPKitchen\CodeSpecsCore\Expectation\Internal\Assert startStep($stepName)
  *
