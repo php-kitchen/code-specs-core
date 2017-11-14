@@ -5,14 +5,16 @@ It's an internal package that gather common code between [CodeSpecs](https://git
 
 For docs and guides go to the [CodeSpecs project documentation](https://github.com/php-kitchen/code-specs/tree/master/docs)
 
-## Build status
+## Package Information
 
-CI status    | Code quality
+### Build status
+
+Build Status    | Code Quality
 ------------ | ------------
 [![Build Status](https://travis-ci.org/php-kitchen/code-specs-core.svg?branch=master)](https://travis-ci.org/php-kitchen/code-specs-core) | [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/php-kitchen/code-specs-core/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/php-kitchen/code-specs-core/?branch=master)
 
 
-## Package information
+### Versions And Statistics
 
 Latest Stable Version |  Latest Unstable Version | Total Downloads | Monthly Downloads | Licensing 
 --------------------- |  ----------------------- |  -------------- | ----------------  |--------- 
