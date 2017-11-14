@@ -24,7 +24,7 @@ Latest Stable Version |  Latest Unstable Version | Total Downloads | Monthly Dow
 
 **`PHP >= 7.1` is required.**
 
-**`PHPUnit >= 6.2` is required.**
+**`PHPUnit >= 6.0` is required but `PHPUnit >= 6.2` is recommended.**
 
 ## Contributing
 
