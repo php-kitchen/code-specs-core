@@ -15,27 +15,43 @@ trait FileStateExpectations {
 
     abstract public function isNotExist();
 
+    /**
+     * @return $this
+     */
     public function isReadable() {
         $this->isExist();
-        $this->startStep('is readable')->assertIsReadable();
+        $this->startStep('is readable')
+            ->assertIsReadable();
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function isNotReadable() {
         $this->isExist();
-        $this->startStep('is not readable')->assertNotIsReadable();
+        $this->startStep('is not readable')
+            ->assertNotIsReadable();
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function isWritable() {
         $this->isExist();
-        $this->startStep('is writable')->assertIsWritable();
+        $this->startStep('is writable')
+            ->assertIsWritable();
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function isNotWritable() {
         $this->isExist();
-        $this->startStep('is not writable')->assertNotIsWritable();
+        $this->startStep('is not writable')
+            ->assertNotIsWritable();
         return $this;
     }
 }

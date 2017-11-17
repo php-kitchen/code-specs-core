@@ -14,43 +14,75 @@ use PHPKitchen\CodeSpecsCore\Expectation\Mixin\FileStateExpectations;
 class FileMatcher extends Matcher {
     use FileStateExpectations;
 
+    /**
+     * @return $this
+     */
     public function isExist(): self {
-        $this->startStep('is exist')->assertFileExists();
+        $this->startStep('is exist')
+            ->assertFileExists();
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function isNotExist(): self {
-        $this->startStep('is not exist')->assertFileNotExists();
+        $this->startStep('is not exist')
+            ->assertFileNotExists();
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function isEqualTo($file): self {
-        $this->startStep('is equal to file "' . $file . '"')->assertFileEquals($file);
+        $this->startStep('is equal to file "' . $file . '"')
+            ->assertFileEquals($file);
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function isNotEqualTo($file): self {
-        $this->startStep('is not equal to file "' . $file . '"')->assertFileNotEquals($file);
+        $this->startStep('is not equal to file "' . $file . '"')
+            ->assertFileNotEquals($file);
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function isEqualToJsonFile($file): self {
-        $this->startStep('is equal to json file "' . $file . '"')->assertJsonFileEqualsJsonFile($file);
+        $this->startStep('is equal to json file "' . $file . '"')
+            ->assertJsonFileEqualsJsonFile($file);
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function isNotEqualToJsonFile($file): self {
-        $this->startStep('is not equal to json file "' . $file . '"')->assertJsonFileNotEqualsJsonFile($file);
+        $this->startStep('is not equal to json file "' . $file . '"')
+            ->assertJsonFileNotEqualsJsonFile($file);
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function isEqualToXmlFile($file): self {
-        $this->startStep('is equal to xml file "' . $file . '"')->assertXmlFileEqualsXmlFile($file);
+        $this->startStep('is equal to xml file "' . $file . '"')
+            ->assertXmlFileEqualsXmlFile($file);
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function isNotEqualToXmlFile($file): self {
-        $this->startStep('is not equal to xml file "' . $file . '"')->assertXmlFileNotEqualsXmlFile($file);
+        $this->startStep('is not equal to xml file "' . $file . '"')
+            ->assertXmlFileNotEqualsXmlFile($file);
         return $this;
     }
 }

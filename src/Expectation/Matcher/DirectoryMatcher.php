@@ -13,13 +13,21 @@ use PHPKitchen\CodeSpecsCore\Expectation\Mixin\FileStateExpectations;
 class DirectoryMatcher extends Matcher {
     use FileStateExpectations;
 
+    /**
+     * @return $this
+     */
     public function isExist() {
-        $this->startStep('is exist')->assertDirectoryExists();
+        $this->startStep('is exist')
+            ->assertDirectoryExists();
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function isNotExist() {
-        $this->startStep('is not exist')->assertDirectoryNotExists();
+        $this->startStep('is not exist')
+            ->assertDirectoryNotExists();
         return $this;
     }
 }
